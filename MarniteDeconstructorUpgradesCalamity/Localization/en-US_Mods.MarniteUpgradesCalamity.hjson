@@ -1,0 +1,13 @@
+Items: {
+	Tools: {
+		HellstoneDeconstructor: {
+			Tooltip: Its engine generates hardlight rays capable of excavating walls from a long distance. Now imbued with Hellstone and Mysterious materials.
+			DisplayName: Hellstone Deconstructor
+		}
+
+		PlagueDeconstructor: {
+			Tooltip: Its engine generates hardlight rays capable of excavating walls from a long distance. Now imbued with the Plague.
+			DisplayName: Plague Deconstructor
+		}
+	}
+}

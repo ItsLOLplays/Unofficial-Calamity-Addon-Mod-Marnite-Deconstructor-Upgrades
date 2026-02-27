@@ -1,0 +1,17 @@
+Mods: {
+	MarniteDeconstructorUpgradesCalamity: {
+		Items: {
+			Tools: {
+				PlagueDeconstructor: {
+					Tooltip: ""
+					DisplayName: Plague Deconstructor
+				}
+
+				HellstoneDeconstructor: {
+					Tooltip: ""
+					DisplayName: Hellstone Deconstructor
+				}
+			}
+		}
+	}
+}
