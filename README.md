@@ -34,7 +34,7 @@ run feel more complete and enjoyable.
 
 This mod will not function without Calamity installed.
 
-=> Please check it out on the Steam Workshop: *Coming Soon*
+=> Please check it out on the Steam Workshop: [https://steamcommunity.com/sharedfiles/filedetails/?id=3674559600](https://steamcommunity.com/sharedfiles/filedetails/?id=3674559600)
 ---
 
 ## Legal
