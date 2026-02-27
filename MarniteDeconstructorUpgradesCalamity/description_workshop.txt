@@ -1,1 +1,30 @@
-This description will show up on the steam page, check out https://steamcommunity.com/comment/Guide/formattinghelp.
+[h1]Tool-Only Calamity Addon[/h1]
+
+[hr][/hr]
+
+[b]Have you ever played the Calamity Mod while only using tools?[/b]
+
+Well I have — and sadly, the mod was not designed with that in mind.
+
+This addon was created to smooth out progression for tool-only runs by adding [b]two new weapons[/b] that extend the upgrade line of the [b]Marnite Deconstructor[/b].
+
+[hr][/hr]
+
+[h2]Purpose[/h2]
+
+The goal is [b]not[/b] to rebalance Calamity.
+
+Instead, this mod exists to make a niche challenge run feel more complete, more natural, and more enjoyable without disrupting normal progression.
+
+[hr][/hr]
+
+[h2]Features[/h2]
+
+[list]
+[*]Two new tool-based weapons
+[*]Extended upgrade progression
+[*]Balanced around Calamity progression
+[*]Designed specifically for tool-only playthroughs
+[/list]
+
+This is an unofficial addon for Calamity Mod.
