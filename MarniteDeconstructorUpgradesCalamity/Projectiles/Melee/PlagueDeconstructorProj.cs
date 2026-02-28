@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using CalamityMod;
 using CalamityMod.Buffs.DamageOverTime;
 using CalamityMod.Items.Tools;
@@ -22,7 +22,9 @@ public class PlagueDeconstructorProj : ModProjectile
     public static Asset<Texture2D> SelectionTex; // Square representing hitbox/selection
 
     // Display name and base texture path
-    public override LocalizedText DisplayName => Language.GetText("Mods.YourModName.Items.PlagueObliterator.DisplayName");
+    public override LocalizedText DisplayName =>
+        Language.GetText("Mods.YourModName.Items.PlagueObliterator.DisplayName");
+
     public override string Texture => "MarniteDeconstructorUpgradesCalamity/Content/Items/Tools/PlagueDeconstructor";
 
     // Convenience references
@@ -105,6 +107,10 @@ public class PlagueDeconstructorProj : ModProjectile
         // Keep item use timer active
         Owner.SetDummyItemTime(2);
 
+        // Handles wall breaking
+        if (Main.myPlayer == Projectile.owner && Timer % 8 == 0)
+            Pound3X3();
+
         // Rotate projectile along its velocity and move it to match player
         Projectile.rotation = Projectile.velocity.ToRotation();
         Projectile.Center = Owner.MountedCenter + Projectile.velocity;
@@ -144,6 +150,69 @@ public class PlagueDeconstructorProj : ModProjectile
             Projectile.netUpdate = true;
 
         Projectile.velocity = newVelocity;
+    }
+
+    // Hammers a 3x3 area of walls centered on the projectile's position
+    private void Pound3X3()
+    {
+        Point tileCenter = Projectile.Center.ToTileCoordinates();
+
+        for (int x = -1; x <= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                int tileX = tileCenter.X + x;
+                int tileY = tileCenter.Y + y;
+
+                if (!WorldGen.InWorld(tileX, tileY))
+                    continue;
+                
+                HammerWall(tileX, tileY);
+                HammerTile(tileX, tileY);
+            }
+        }
+    }
+
+    // Attempts to remove a wall at the given coordinates
+    private void HammerWall(int tileX, int tileY)
+    {
+        Tile tile = Main.tile[tileX, tileY];
+
+        if (tile == null || tile.WallType == WallID.None)
+            return;
+
+        WorldGen.KillWall(tileX, tileY, false);
+
+        if (Main.netMode == NetmodeID.MultiplayerClient)
+        {
+            NetMessage.SendData(
+                MessageID.TileManipulation,
+                number: 2,
+                number2: tileX,
+                number3: tileY
+            );
+        }
+    }
+
+    // Attempts to hammer (slope/half-block) a tile at the given coordinates
+    private void HammerTile(int tileX, int tileY)
+    {
+        Tile tile = Main.tile[tileX, tileY];
+
+        if (tile == null || !tile.HasTile)
+            return;
+
+        WorldGen.PoundTile(tileX, tileY);
+
+        if (Main.netMode == NetmodeID.MultiplayerClient)
+        {
+            NetMessage.SendData(
+                MessageID.TileManipulation,
+                number: 0,
+                number2: tileX,
+                number3: tileY
+            );
+        }
     }
 
     // Draws a single animated beam from the weapon, including the spinning square effect and chromatic aberration
