@@ -1,4 +1,4 @@
 displayName = Calamity Mod Addon - Marnite Deconstructor Upgrades
 author = ItsLOLplays
-version = 0.2
+version = 0.3
 modReferences = CalamityMod

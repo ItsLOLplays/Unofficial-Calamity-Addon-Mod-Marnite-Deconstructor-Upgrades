@@ -2,6 +2,7 @@ using System;
 using CalamityMod;
 using CalamityMod.Buffs.DamageOverTime;
 using CalamityMod.Items.Tools;
+using MarniteDeconstructorUpgradesCalamity.Config;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
@@ -155,6 +156,14 @@ public class PlagueDeconstructorProj : ModProjectile
     // Hammers a 3x3 area of walls centered on the projectile's position
     private void Pound3X3()
     {
+        var config = ModContent.GetInstance<MduConfig>();
+        
+        if (!config.EnableTileHammering && !config.EnableWallHammering)
+            return;
+        
+        if (config.DisableHammerPower)
+            return;
+        
         Point tileCenter = Projectile.Center.ToTileCoordinates();
 
         for (int x = -1; x <= 1; x++)
@@ -167,8 +176,11 @@ public class PlagueDeconstructorProj : ModProjectile
                 if (!WorldGen.InWorld(tileX, tileY))
                     continue;
                 
-                HammerWall(tileX, tileY);
-                HammerTile(tileX, tileY);
+                if (config.EnableWallHammering)
+                    HammerWall(tileX, tileY);
+                
+                if (config.EnableTileHammering)
+                    HammerTile(tileX, tileY);
             }
         }
     }

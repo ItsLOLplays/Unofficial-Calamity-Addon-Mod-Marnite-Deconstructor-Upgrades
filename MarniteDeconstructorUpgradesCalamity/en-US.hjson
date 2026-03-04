@@ -1,17 +1,38 @@
 Mods: {
 	MarniteDeconstructorUpgradesCalamity: {
-		Items: {
-			Tools: {
-				PlagueDeconstructor: {
-					Tooltip: ""
-					DisplayName: Plague Deconstructor
-				}
-
-				HellstoneDeconstructor: {
-					Tooltip: ""
-					DisplayName: Hellstone Deconstructor
-				}
-			}
-		}
+		Configs: {
+        	MDUConfig: {
+        		DisplayName: MDU Settings
+        
+        		EnableTileHammering: {
+        			Label: Enable 3x3 Tile Hammering
+        			Tooltip: If disabled, the Plague Deconstructor will hammer tiles normally (1x1).
+        		}
+        
+        		EnableWallHammering: {
+        			Label: Enable 3x3 Wall Hammering
+        			Tooltip: If disabled, the Plague Deconstructor will hammer walls normally (1x1).
+        		}
+        
+        		DisableHammerPower: {
+        			Label: Disable Hammer Power
+        			Tooltip: If enabled, the new deconstructors will have their hammer power lowered to 1%.
+        		}
+        	}
+        }
+        
+        Items: {
+        	Tools: {
+        		HellstoneDeconstructor: {
+        			Tooltip: Its engine generates hardlight rays capable of excavating walls from a long distance. Now imbued with Hellstone and Mysterious materials.
+        			DisplayName: Hellstone Deconstructor
+        		}
+        
+        		PlagueDeconstructor: {
+        			Tooltip: Its engine generates hardlight rays capable of excavating walls from a long distance. Now imbued with the Plague.
+        			DisplayName: Plague Deconstructor
+        		}
+        	}
+        }
 	}
 }

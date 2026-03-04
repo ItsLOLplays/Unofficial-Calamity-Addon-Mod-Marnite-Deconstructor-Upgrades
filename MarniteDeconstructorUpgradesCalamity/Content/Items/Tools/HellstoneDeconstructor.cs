@@ -45,6 +45,17 @@ public class HellstoneDeconstructor : ModItem, ILocalizedModType
     public override void HoldItem(Player player)
     {
         player.Calamity().mouseWorldListener = true;
+        HammerPowerChange();
+    }
+    
+    public void HammerPowerChange()
+    {
+        var config = ModContent.GetInstance<MduConfig>();
+
+        if (config.DisableHammerPower)
+            Item.hammer = 0;
+        else
+            Item.hammer = 75;
     }
     
     public override void AddRecipes()

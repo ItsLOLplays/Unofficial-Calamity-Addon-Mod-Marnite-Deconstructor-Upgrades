@@ -2,6 +2,7 @@
 using CalamityMod.Items;
 using CalamityMod.Items.Accessories;
 using CalamityMod.Items.Materials;
+using MarniteDeconstructorUpgradesCalamity.Config;
 using MarniteDeconstructorUpgradesCalamity.Projectiles.Melee;
 using Terraria;
 using Terraria.ID;
@@ -45,6 +46,17 @@ public class PlagueDeconstructor : ModItem, ILocalizedModType
     public override void HoldItem(Player player)
     {
         player.Calamity().mouseWorldListener = true;
+        HammerPowerChange();
+    }
+
+    public void HammerPowerChange()
+    {
+        var config = ModContent.GetInstance<MduConfig>();
+
+        if (config.DisableHammerPower)
+            Item.hammer = 0;
+        else
+            Item.hammer = 95;
     }
 
     public override void AddRecipes()
