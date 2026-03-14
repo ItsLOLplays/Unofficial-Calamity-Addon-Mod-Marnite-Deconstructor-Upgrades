@@ -21,7 +21,7 @@ public class HellstoneDeconstructorProj : ModProjectile
     public static Asset<Texture2D> SelectionTex; // Square representing hitbox/selection
 
     // Display name and base texture path
-    public override LocalizedText DisplayName => Language.GetText("Mods.YourModName.Items.HellstoneObliterator.DisplayName");
+    public override LocalizedText DisplayName => Language.GetText("Mods.MarniteDeconstructorUpgradesCalamity.Items.HellstoneObliterator.DisplayName");
     public override string Texture => "MarniteDeconstructorUpgradesCalamity/Content/Items/Tools/HellstoneDeconstructor";
 
     // Convenience references
@@ -42,7 +42,7 @@ public class HellstoneDeconstructorProj : ModProjectile
         Projectile.tileCollide = false; // Passes through tiles
         Projectile.hide = true; // Hide the default projectile sprite
         Projectile.ownerHitCheck = true; // Only hits if player can hit
-        Projectile.DamageType = DamageClass.Melee;
+        Projectile.DamageType = ModContent.GetInstance<TrueMeleeNoSpeedDamageClass>();
         Projectile.usesIDStaticNPCImmunity = true;
         Projectile.idStaticNPCHitCooldown = 10; // Cooldown between hits on same NPC
     }
@@ -150,12 +150,13 @@ public class HellstoneDeconstructorProj : ModProjectile
     {
         // Calculate start position of the beam
         var startPos = Owner.MountedCenter
-                       + direction * 30f
-                       + direction.RotatedBy(MathHelper.PiOver2) *
-                       (float)Math.Cos(MathHelper.TwoPi * beamProgress + SpeenBeams * 0.06f) * 8f;
+                       + direction * 30f // Base distance from player
+                       + direction.RotatedBy(MathHelper.PiOver2) * -2f // small perpendicular offset
+                       + direction.RotatedBy(MathHelper.PiOver2) // Spinning motion along perpendicular
+                       * (float)Math.Cos(MathHelper.TwoPi * beamProgress + SpeenBeams * 0.06f) * 8f;
 
         // Animate square movement along the beam (height + width)
-        var squareHeight = (beamProgress + SpeenBeams * 0.02f) % 1;
+        float squareHeight = (beamProgress + SpeenBeams * 0.02f) % 1;
         if (squareHeight < 0.25)
             squareHeight = 0;
         else if (squareHeight < 0.5)
@@ -165,7 +166,7 @@ public class HellstoneDeconstructorProj : ModProjectile
         else
             squareHeight = 1 - (squareHeight - 0.75f) / 0.25f;
 
-        var squareWidth = (beamProgress + SpeenBeams * 0.02f) % 1;
+        float squareWidth = (beamProgress + SpeenBeams * 0.02f) % 1;
         if (squareWidth < 0.25)
             squareWidth /= 0.25f;
         else if (squareWidth < 0.5)
@@ -275,7 +276,7 @@ public class HellstoneDeconstructorProj : ModProjectile
             (float)(0.5 + 0.5 * Math.Sin(SpeenBeams * 0.2f + 1.2f)));
 
         // Offset along weapon's facing direction
-        Vector2 bloomOffset = direction * 16f;
+        Vector2 bloomOffset = direction * 29f;
         Vector2 bloomOrigin = new Vector2(bloomTexture.Width / 2f, bloomTexture.Height / 2f);
 
         // Handle mirroring if weapon is flipped horizontally
@@ -322,7 +323,7 @@ public class HellstoneDeconstructorProj : ModProjectile
                 Projectile.Center + offset - Main.screenPosition,
                 null,
                 bloomColor.MultiplyRGB(colorMod),
-                0.0f,
+                0f,
                 selectionTexture.Size() / 2f,
                 Projectile.scale,
                 SpriteEffects.None));

@@ -22,7 +22,7 @@ public class PlagueDeconstructor : ModItem, ILocalizedModType
         Item.width = 36;
         Item.height = 18;
         Item.damage = 137;
-        Item.DamageType = DamageClass.Melee;
+        Item.DamageType = ModContent.GetInstance<TrueMeleeNoSpeedDamageClass>();
         Item.ArmorPenetration = ArmorPenetration;
         Item.hammer = 95;
         Item.tileBoost = 20;

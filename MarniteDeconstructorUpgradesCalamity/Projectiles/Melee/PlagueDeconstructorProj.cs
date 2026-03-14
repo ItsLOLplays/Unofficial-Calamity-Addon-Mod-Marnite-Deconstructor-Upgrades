@@ -21,11 +21,10 @@ public class PlagueDeconstructorProj : ModProjectile
     public static Asset<Texture2D> GlowmaskTex; // The weapon's bloom along the beam
     public static Asset<Texture2D> BloomTex; // The central glow circle
     public static Asset<Texture2D> SelectionTex; // Square representing hitbox/selection
+    
 
     // Display name and base texture path
-    public override LocalizedText DisplayName =>
-        Language.GetText("Mods.YourModName.Items.PlagueObliterator.DisplayName");
-
+    public override LocalizedText DisplayName => Language.GetText("Mods.MarniteDeconstructorUpgradesCalamity.Items.PlagueObliterator.DisplayName");
     public override string Texture => "MarniteDeconstructorUpgradesCalamity/Content/Items/Tools/PlagueDeconstructor";
 
     // Convenience references
@@ -46,7 +45,7 @@ public class PlagueDeconstructorProj : ModProjectile
         Projectile.tileCollide = false; // Passes through tiles
         Projectile.hide = true; // Hide the default projectile sprite
         Projectile.ownerHitCheck = true; // Only hits if player can hit
-        Projectile.DamageType = DamageClass.Melee;
+        Projectile.DamageType = ModContent.GetInstance<TrueMeleeNoSpeedDamageClass>();
         Projectile.usesIDStaticNPCImmunity = true;
         Projectile.idStaticNPCHitCooldown = 10; // Cooldown between hits on same NPC
     }
