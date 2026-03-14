@@ -21,7 +21,7 @@ public class HellstoneDeconstructor : ModItem, ILocalizedModType
         Item.width = 36;
         Item.height = 18;
         Item.damage = 24;
-        Item.DamageType = DamageClass.Melee;
+        Item.DamageType = ModContent.GetInstance<TrueMeleeNoSpeedDamageClass>();
         Item.ArmorPenetration = ArmorPenetration;
         Item.hammer = 75;
         Item.tileBoost = 15;
